@@ -1,0 +1,19 @@
+{
+    "manifest_version":2,
+    "name": "Bring Sausage Girl Back",
+    "version": "1.0",
+    "description": "9Gag banned the Sausage Girl Gif, we are here to bring her back!",
+    "permissions": ["tabs", "http://*/*"],
+    "content_scripts" : [{
+        "matches" : [ "http://9gag.com/gag/*","http://www.9gag.com/gag/*"],
+        "js" : ["injecter.js"]
+    }],
+    "icons": {
+	"16":"icon16.png",
+	"48":"icon48.png",
+	"128":"icon128.png"
+    },
+    "web_accessible_resources":[
+        "sausage.js"	
+    ]
+}
