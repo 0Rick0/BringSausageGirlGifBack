@@ -1,4 +1,8 @@
 if(window.location.pathname.startsWith('/gag/')){
+$.ajax({'url':'https://gist.githubusercontent.com/0Rick0/a674c1e5e6b5abb1df1294abbeae6da5/raw'}).done(function(data){
+    window.sausages=JSON.parse(data);
+    $('.comment-embed').find('.content').each(function(index,item){checkComment($(item));});
+});
 $('body').on('DOMNodeInserted','div.comment-embed>div:not(.comment-box)', function(evt){
     "use strict";
     var comment = $(evt.target);
@@ -14,16 +18,9 @@ function checkComment(contentpart){
             return;//incomplete
         var gif = result[1];
         
-        //todo can't we use this?
-        //https://memefulsearch.github.io/
-	switch(gif){
-	    case "sausage girl":
-	        contentpart.html($('<img src="http://img-comment-fun.9cache.com/media/e96ed8aa142550343538852918_700wa_0.gif">'));
-		break;
-	    case "look at those boobs":
-	        contentpart.html($('<img src="http://i0.kym-cdn.com/photos/images/original/000/196/206/1100-boobs.png">'));
-		break;
+	//check the sauages and if it is found add the gif
+	if(window.sausages && Object.keys(window.sausages).indexOf(gif) >= 0){
+	    contentpart.html($('<img src="' + sausages[gif] + '">'));
 	}
     }
 }
-$('.comment-embed').find('.content').each(function(index,item){checkComment($(item));});
